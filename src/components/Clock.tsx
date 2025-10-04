@@ -23,16 +23,16 @@ export const Clock = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-8">
       {/* Time Display */}
-      <div className="flex items-center gap-4 md:gap-6 lg:gap-8 tabular-nums">
+      <div className="flex items-center gap-2 md:gap-3 lg:gap-4 tabular-nums">
         {/* Hours */}
-        <div className="flex w-[16rem] md:w-[24rem] lg:w-[32rem] justify-center">
+        <div className="flex">
           <AnimatedDigit
             value={hours[0]}
-            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-hour leading-none w-[8rem] md:w-[12rem] lg:w-[16rem] text-center"
+            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-hour leading-none"
           />
           <AnimatedDigit
             value={hours[1]}
-            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-hour leading-none w-[8rem] md:w-[12rem] lg:w-[16rem] text-center"
+            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-hour leading-none"
           />
         </div>
 
@@ -40,20 +40,20 @@ export const Clock = () => {
         <motion.span
           animate={{ opacity: isOddSecond ? 1 : 0 }}
           transition={{ duration: 0.2, ease: "easeInOut" }}
-          className="text-[6rem] md:text-[10rem] lg:text-[14rem] font-display text-clock-separator leading-none w-[3rem] md:w-[5rem] lg:w-[7rem] text-center"
+          className="text-[6rem] md:text-[10rem] lg:text-[14rem] font-display text-clock-separator leading-none min-w-[2rem] md:min-w-[3rem] lg:min-w-[4rem] text-center"
         >
           :
         </motion.span>
 
         {/* Minutes */}
-        <div className="flex w-[16rem] md:w-[24rem] lg:w-[32rem] justify-center">
+        <div className="flex">
           <AnimatedDigit
             value={minutes[0]}
-            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-minute leading-none w-[8rem] md:w-[12rem] lg:w-[16rem] text-center"
+            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-minute leading-none"
           />
           <AnimatedDigit
             value={minutes[1]}
-            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-minute leading-none w-[8rem] md:w-[12rem] lg:w-[16rem] text-center"
+            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-minute leading-none"
           />
         </div>
 
@@ -61,20 +61,20 @@ export const Clock = () => {
         <motion.span
           animate={{ opacity: isOddSecond ? 1 : 0 }}
           transition={{ duration: 0.2, ease: "easeInOut" }}
-          className="text-[6rem] md:text-[10rem] lg:text-[14rem] font-display text-clock-separator leading-none w-[3rem] md:w-[5rem] lg:w-[7rem] text-center"
+          className="text-[6rem] md:text-[10rem] lg:text-[14rem] font-display text-clock-separator leading-none min-w-[2rem] md:min-w-[3rem] lg:min-w-[4rem] text-center"
         >
           :
         </motion.span>
 
         {/* Seconds */}
-        <div className="flex w-[16rem] md:w-[24rem] lg:w-[32rem] justify-center">
+        <div className="flex">
           <AnimatedDigit
             value={seconds[0]}
-            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-second leading-none w-[8rem] md:w-[12rem] lg:w-[16rem] text-center"
+            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-second leading-none"
           />
           <AnimatedDigit
             value={seconds[1]}
-            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-second leading-none w-[8rem] md:w-[12rem] lg:w-[16rem] text-center"
+            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-second leading-none"
           />
         </div>
       </div>
