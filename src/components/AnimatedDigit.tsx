@@ -1,0 +1,41 @@
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+
+interface AnimatedDigitProps {
+  value: string;
+  className?: string;
+}
+
+export const AnimatedDigit = ({ value, className = "" }: AnimatedDigitProps) => {
+  const digitRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    if (digitRef.current) {
+      gsap.fromTo(
+        digitRef.current,
+        { scale: 0.95, opacity: 0.7 },
+        { scale: 1, opacity: 1, duration: 0.3, ease: "power2.out" }
+      );
+    }
+  }, [value]);
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.span
+        key={value}
+        ref={digitRef}
+        initial={{ y: -20, opacity: 0, scale: 0.8 }}
+        animate={{ y: 0, opacity: 1, scale: 1 }}
+        exit={{ y: 20, opacity: 0, scale: 0.8 }}
+        transition={{
+          duration: 0.4,
+          ease: [0.4, 0, 0.2, 1],
+        }}
+        className={`inline-block ${className}`}
+      >
+        {value}
+      </motion.span>
+    </AnimatePresence>
+  );
+};

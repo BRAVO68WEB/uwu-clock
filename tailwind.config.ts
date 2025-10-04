@@ -13,12 +13,31 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        clock: {
+          hour: "hsl(var(--clock-hour))",
+          minute: "hsl(var(--clock-minute))",
+          second: "hsl(var(--clock-second))",
+          separator: "hsl(var(--clock-separator))",
+        },
+        date: {
+          bg: "hsl(var(--date-bg))",
+          text: "hsl(var(--date-text))",
+        },
+        gradient: {
+          start: "hsl(var(--gradient-start))",
+          mid: "hsl(var(--gradient-mid))",
+          end: "hsl(var(--gradient-end))",
+        },
+        wave: "hsl(var(--wave-line))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
