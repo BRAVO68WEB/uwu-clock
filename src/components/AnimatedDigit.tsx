@@ -21,21 +21,18 @@ export const AnimatedDigit = ({ value, className = "" }: AnimatedDigitProps) => 
   }, [value]);
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.span
-        key={value}
-        ref={digitRef}
-        initial={{ y: -20, opacity: 0, scale: 0.8 }}
-        animate={{ y: 0, opacity: 1, scale: 1 }}
-        exit={{ y: 20, opacity: 0, scale: 0.8 }}
-        transition={{
-          duration: 0.4,
-          ease: [0.4, 0, 0.2, 1],
-        }}
-        className={`inline-block ${className}`}
-      >
-        {value}
-      </motion.span>
-    </AnimatePresence>
+    <div className="inline-flex justify-center items-center w-[4.5rem] md:w-[7rem] lg:w-[9.5rem]">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={value}
+          ref={digitRef}
+          initial={{ y: -20, opacity: 0, scale: 0.8 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
+          className={`inline-block text-center ${className}`}
+        >
+          {value}
+        </motion.span>
+      </AnimatePresence>
+    </div>
   );
 };

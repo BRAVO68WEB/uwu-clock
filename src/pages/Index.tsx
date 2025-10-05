@@ -1,18 +1,16 @@
 import { Clock } from "@/components/Clock";
-import { WavyBackground } from "@/components/WavyBackground";
+import { Background } from "@/components/Background";
 import { FullscreenButton } from "@/components/FullscreenButton";
+import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { motion } from "framer-motion";
 
 const Index = () => {
   return (
     <div className="relative min-h-screen w-full bg-background overflow-hidden">
-      {/* Gradient Overlay */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-gradient-start/10 via-gradient-mid/10 to-gradient-end/10 opacity-50" />
+      {/* Background */}
+      <div className="fixed inset-0 z-0">
+        <Background />
       </div>
-
-      {/* Wavy Background */}
-      <WavyBackground />
 
       {/* Main Content */}
       <motion.div
@@ -26,6 +24,9 @@ const Index = () => {
 
       {/* Fullscreen Button */}
       <FullscreenButton />
+
+      {/* Dark Mode Toggle */}
+      <DarkModeToggle />
     </div>
   );
 };

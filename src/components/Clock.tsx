@@ -39,7 +39,10 @@ export const Clock = () => {
         {/* Separator */}
         <motion.span
           animate={{ opacity: isOddSecond ? 1 : 0 }}
-          transition={{ duration: 0.2, ease: "easeInOut" }}
+          transition={{
+            duration: 0.1,
+            ease: "backIn"
+          }}
           className="text-[6rem] md:text-[10rem] lg:text-[14rem] font-display text-clock-separator leading-none min-w-[2rem] md:min-w-[3rem] lg:min-w-[4rem] text-center"
         >
           :
@@ -59,8 +62,13 @@ export const Clock = () => {
 
         {/* Separator */}
         <motion.span
-          animate={{ opacity: isOddSecond ? 1 : 0 }}
-          transition={{ duration: 0.2, ease: "easeInOut" }}
+          animate={{
+            opacity: isOddSecond ? 1 : 0,
+          }}
+          transition={{
+            duration: 0.1,
+            ease: "backIn"
+          }}
           className="text-[6rem] md:text-[10rem] lg:text-[14rem] font-display text-clock-separator leading-none min-w-[2rem] md:min-w-[3rem] lg:min-w-[4rem] text-center"
         >
           :
