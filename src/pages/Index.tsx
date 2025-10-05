@@ -2,6 +2,8 @@ import { Clock } from "@/components/Clock";
 import { Background } from "@/components/Background";
 import { FullscreenButton } from "@/components/FullscreenButton";
 import { DarkModeToggle } from "@/components/DarkModeToggle";
+import RainSounds from "@/components/RainSounds";
+import FocusMode from "@/components/FocusMode";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -22,11 +24,17 @@ const Index = () => {
         <Clock />
       </motion.div>
 
+      {/* Focus Mode */}
+      <FocusMode />
+
       {/* Fullscreen Button */}
       <FullscreenButton />
 
       {/* Dark Mode Toggle */}
       <DarkModeToggle />
+
+      {/* Rain Sounds */}
+      <RainSounds />
     </div>
   );
 };
