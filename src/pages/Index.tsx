@@ -37,7 +37,7 @@ const Index = () => {
             variant="outline"
             size="sm"
             className="bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background/90 transition-all duration-300 shadow-lg"
-            onClick={() => window.open('https://github.com/BRAVO68WEB/cozy-clock', '_blank')}
+            onClick={() => window.open('https://github.com/BRAVO68WEB/uwu-clock', '_blank')}
           >
             <span className="text-sm font-medium">Made with</span>
             <Heart className="h-4 w-4 mx-1 text-red-500 fill-red-500" />
