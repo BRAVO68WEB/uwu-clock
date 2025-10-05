@@ -15,4 +15,20 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        sw: path.resolve(__dirname, 'public/sw.js'),
+      },
+      output: {
+        dir: 'dist',
+        entryFileNames: '[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]',
+      },
+    }
+  },
+  // Ensure service worker is served correctly
+  publicDir: 'public',
 }));
