@@ -1,10 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, {
+import {
   createContext,
   useContext,
   useEffect,
   useMemo,
   useState,
+  type ReactNode,
 } from "react";
 import { idbGet, idbSet } from "@/lib/settings-db";
 import { BackgroundOption } from "@/components/backgrounds";
@@ -74,9 +75,7 @@ type SettingsContextValue = {
 
 const SettingsContext = createContext<SettingsContextValue | null>(null);
 
-export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const SettingsProvider = ({ children }: { children: ReactNode }) => {
   const [settings, setSettings] = useState<SettingsState>(DEFAULT_SETTINGS);
   const [loaded, setLoaded] = useState(false);
 

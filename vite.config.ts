@@ -9,9 +9,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(
-    Boolean,
-  ),
+  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -20,10 +18,9 @@ export default defineConfig(({ mode }) => ({
   build: {
     target: "es2020",
     cssCodeSplit: true,
-    modulePreload: { polyfill: false },
-    sourcemap: false,
+    modulePreload: { polyfill: true },
+    sourcemap: true,
     minify: "esbuild",
-    // Strip debug statements for smaller bundles
     esbuild: {
       drop: ["console", "debugger"],
     },
@@ -34,34 +31,16 @@ export default defineConfig(({ mode }) => ({
       },
       output: {
         dir: "dist",
-        entryFileNames: "[name].js",
-        // Use content hashing for better long-term caching on non-entry chunks
-        chunkFileNames: "assets/[name]-[hash].js",
-        assetFileNames: "assets/[name].[ext]",
-        manualChunks(id) {
-          if (id.includes("node_modules")) {
-            if (id.includes("three")) return "vendor_three";
-            if (id.includes("postprocessing")) return "vendor_postprocessing";
-            if (id.includes("react") || id.includes("react-dom"))
-              return "vendor_react";
-            if (id.includes("framer-motion")) return "vendor_motion";
-            if (id.includes("@radix-ui") || id.includes("cmdk"))
-              return "vendor_radix";
-            if (id.includes("@tanstack")) return "vendor_tanstack";
-            if (id.includes("react-router")) return "vendor_router";
-            if (id.includes("recharts")) return "vendor_charts";
-            return "vendor";
-          }
-          // Group background effects separately to keep the main app lean
-          if (id.includes("/src/components/backgrounds/")) {
-            return "backgrounds";
-          }
-        },
+        entryFileNames: "assets/js/[name]-[hash].js",
+        chunkFileNames: "assets/js/[name]-[hash].js",
+        assetFileNames: "assets/[name]-[hash][extname]",
+        hoistTransitiveImports: false,
       },
-      // Favor reliable tree-shaking behavior
-      treeshake: "recommended",
+      treeshake: true,
     },
+    reportCompressedSize: false,
+    chunkSizeWarningLimit: 1500,
+    emptyOutDir: true,
   },
-  // Ensure service worker is served correctly
   publicDir: "public",
 }));
