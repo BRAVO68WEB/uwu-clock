@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Maximize, Minimize } from "lucide-react";
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
@@ -16,7 +16,7 @@ export const FullscreenButton = () => {
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
   }, []);
 
-  const toggleFullscreen = async () => {
+  const toggleFullscreen = useCallback(async () => {
     try {
       if (!document.fullscreenElement) {
         await document.documentElement.requestFullscreen();
@@ -26,7 +26,20 @@ export const FullscreenButton = () => {
     } catch (error) {
       console.error("Error toggling fullscreen:", error);
     }
-  };
+  }, []);
+
+  // Listen to a global event to allow keyboard shortcuts to toggle fullscreen
+  useEffect(() => {
+    const handler = () => {
+      void toggleFullscreen();
+    };
+    window.addEventListener("uwu:toggle-fullscreen", handler as EventListener);
+    return () =>
+      window.removeEventListener(
+        "uwu:toggle-fullscreen",
+        handler as EventListener,
+      );
+  }, [toggleFullscreen]);
 
   return (
     <motion.div

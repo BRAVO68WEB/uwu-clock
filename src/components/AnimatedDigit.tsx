@@ -7,7 +7,10 @@ interface AnimatedDigitProps {
   className?: string;
 }
 
-export const AnimatedDigit = ({ value, className = "" }: AnimatedDigitProps) => {
+export const AnimatedDigit = ({
+  value,
+  className = "",
+}: AnimatedDigitProps) => {
   const digitRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -15,7 +18,7 @@ export const AnimatedDigit = ({ value, className = "" }: AnimatedDigitProps) => 
       gsap.fromTo(
         digitRef.current,
         { scale: 0.95, opacity: 0.7 },
-        { scale: 1, opacity: 1, duration: 0.3, ease: "power2.out" }
+        { scale: 1, opacity: 1, duration: 0.3, ease: "power2.out" },
       );
     }
   }, [value]);

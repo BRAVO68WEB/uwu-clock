@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Target, X, Clock, CheckCircle } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Target, X, Clock, CheckCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface FocusSession {
   goal: string;
@@ -15,32 +15,32 @@ interface FocusSession {
 const FocusMode: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [focusSession, setFocusSession] = useState<FocusSession | null>(null);
-  const [goal, setGoal] = useState('');
-  const [endTime, setEndTime] = useState('');
-  const [timeRemaining, setTimeRemaining] = useState('');
+  const [goal, setGoal] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [timeRemaining, setTimeRemaining] = useState("");
 
   // Audio element for sound alert
   const playAlertSound = () => {
-    const audio = new Audio('/cat-meow-1-fx-306178.mp3');
+    const audio = new Audio("/cat-meow-1-fx-306178.mp3");
     audio.volume = 0.5; // 50% volume
-    audio.play().catch(error => {
-      console.log('Could not play alert sound:', error);
+    audio.play().catch((error) => {
+      console.log("Could not play alert sound:", error);
     });
   };
 
   // Load focus session from localStorage on component mount
   useEffect(() => {
-    const savedSession = localStorage.getItem('focusSession');
+    const savedSession = localStorage.getItem("focusSession");
     if (savedSession) {
       const session: FocusSession = JSON.parse(savedSession);
       const now = new Date();
       const sessionEndTime = new Date(session.endTime);
-      
+
       if (sessionEndTime > now && session.isActive) {
         setFocusSession(session);
       } else {
         // Session expired, clear it
-        localStorage.removeItem('focusSession');
+        localStorage.removeItem("focusSession");
       }
     }
   }, []);
@@ -58,8 +58,8 @@ const FocusMode: React.FC = () => {
         // Session ended - play alert sound
         playAlertSound();
         setFocusSession(null);
-        localStorage.removeItem('focusSession');
-        setTimeRemaining('');
+        localStorage.removeItem("focusSession");
+        setTimeRemaining("");
       } else {
         const hours = Math.floor(diff / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -80,16 +80,16 @@ const FocusMode: React.FC = () => {
     };
 
     setFocusSession(session);
-    localStorage.setItem('focusSession', JSON.stringify(session));
-    setGoal('');
-    setEndTime('');
+    localStorage.setItem("focusSession", JSON.stringify(session));
+    setGoal("");
+    setEndTime("");
     setIsOpen(false);
   };
 
   const endFocusSession = () => {
     setFocusSession(null);
-    localStorage.removeItem('focusSession');
-    setTimeRemaining('');
+    localStorage.removeItem("focusSession");
+    setTimeRemaining("");
   };
 
   const getCurrentDateTime = () => {
@@ -97,6 +97,14 @@ const FocusMode: React.FC = () => {
     now.setMinutes(now.getMinutes() + 30); // Default to 30 minutes from now
     return now.toISOString().slice(0, 16);
   };
+
+  // Global open event: allow keyboard shortcut to open the menu
+  useEffect(() => {
+    const handler = () => setIsOpen(true);
+    window.addEventListener("uwu:open-focus", handler as EventListener);
+    return () =>
+      window.removeEventListener("uwu:open-focus", handler as EventListener);
+  }, []);
 
   return (
     <div className="fixed top-4 left-4 z-50">
@@ -106,13 +114,13 @@ const FocusMode: React.FC = () => {
         size="sm"
         onClick={() => setIsOpen(!isOpen)}
         className={`${
-          focusSession?.isActive 
-            ? 'bg-primary text-primary-foreground shadow-lg' 
-            : 'bg-background/80 backdrop-blur-sm border-border'
+          focusSession?.isActive
+            ? "bg-primary text-primary-foreground shadow-lg"
+            : "bg-background/80 backdrop-blur-sm border-border"
         } transition-all duration-200`}
       >
         <Target className="h-4 w-4 mr-2" />
-        {focusSession?.isActive ? 'Focus Active' : 'Focus Mode'}
+        {focusSession?.isActive ? "Focus Active" : "Focus Mode"}
         {focusSession?.isActive && timeRemaining && (
           <Badge variant="secondary" className="ml-2 text-xs">
             {timeRemaining}
@@ -129,8 +137,12 @@ const FocusMode: React.FC = () => {
         >
           <div className="flex items-start justify-between">
             <div className="flex-1">
-              <p className="text-sm font-medium text-foreground mb-1">Current Goal:</p>
-              <p className="text-sm text-muted-foreground">{focusSession.goal}</p>
+              <p className="text-sm font-medium text-foreground mb-1">
+                Current Goal:
+              </p>
+              <p className="text-sm text-muted-foreground">
+                {focusSession.goal}
+              </p>
             </div>
             <Button
               variant="ghost"
@@ -175,8 +187,12 @@ const FocusMode: React.FC = () => {
                 {focusSession?.isActive ? (
                   <div className="space-y-3">
                     <div className="p-3 bg-primary/10 rounded-lg border border-primary/20">
-                      <p className="text-sm font-medium text-foreground mb-1">Active Goal:</p>
-                      <p className="text-sm text-muted-foreground">{focusSession.goal}</p>
+                      <p className="text-sm font-medium text-foreground mb-1">
+                        Active Goal:
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {focusSession.goal}
+                      </p>
                       <div className="flex items-center mt-2 text-xs text-muted-foreground">
                         <Clock className="h-3 w-3 mr-1" />
                         {timeRemaining} remaining

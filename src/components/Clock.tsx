@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { format } from "date-fns";
 import { AnimatedDigit } from "./AnimatedDigit";
 import { motion } from "framer-motion";
+import { useSettings } from "@/hooks/useSettings";
 
 export const Clock = () => {
   const [time, setTime] = useState(new Date());
+  const { settings } = useSettings();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -19,10 +21,10 @@ export const Clock = () => {
   const seconds = format(time, "ss");
   const dateStr = format(time, "EEEE, dd MMMM, yyyy");
   const isOddSecond = parseInt(seconds) % 2 === 1;
+  const separatorVisible = settings.clock.blinkSeparators ? isOddSecond : true;
 
-  return (
-    <div className="flex flex-col items-center justify-center gap-8">
-      {/* Time Display */}
+  const TimeDisplay = useMemo(
+    () => (
       <div className="flex items-center gap-2 md:gap-3 lg:gap-4 tabular-nums">
         {/* Hours */}
         <div className="flex">
@@ -38,11 +40,8 @@ export const Clock = () => {
 
         {/* Separator */}
         <motion.span
-          animate={{ opacity: isOddSecond ? 1 : 0 }}
-          transition={{
-            duration: 0.1,
-            ease: "backIn"
-          }}
+          animate={{ opacity: separatorVisible ? 1 : 0 }}
+          transition={{ duration: 0.1, ease: "backIn" }}
           className="text-[6rem] md:text-[10rem] lg:text-[14rem] font-display text-clock-separator leading-none min-w-[2rem] md:min-w-[3rem] lg:min-w-[4rem] text-center"
         >
           :
@@ -60,34 +59,36 @@ export const Clock = () => {
           />
         </div>
 
-        {/* Separator */}
-        <motion.span
-          animate={{
-            opacity: isOddSecond ? 1 : 0,
-          }}
-          transition={{
-            duration: 0.1,
-            ease: "backIn"
-          }}
-          className="text-[6rem] md:text-[10rem] lg:text-[14rem] font-display text-clock-separator leading-none min-w-[2rem] md:min-w-[3rem] lg:min-w-[4rem] text-center"
-        >
-          :
-        </motion.span>
+        {/* Second Separator + Seconds (optional) */}
+        {settings.clock.showSeconds && (
+          <>
+            <motion.span
+              animate={{ opacity: separatorVisible ? 1 : 0 }}
+              transition={{ duration: 0.1, ease: "backIn" }}
+              className="text-[6rem] md:text-[10rem] lg:text-[14rem] font-display text-clock-separator leading-none min-w-[2rem] md:min-w-[3rem] lg:min-w-[4rem] text-center"
+            >
+              :
+            </motion.span>
 
-        {/* Seconds */}
-        <div className="flex">
-          <AnimatedDigit
-            value={seconds[0]}
-            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-second leading-none"
-          />
-          <AnimatedDigit
-            value={seconds[1]}
-            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-second leading-none"
-          />
-        </div>
+            <div className="flex">
+              <AnimatedDigit
+                value={seconds[0]}
+                className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-second leading-none"
+              />
+              <AnimatedDigit
+                value={seconds[1]}
+                className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-display text-clock-second leading-none"
+              />
+            </div>
+          </>
+        )}
       </div>
+    ),
+    [hours, minutes, seconds, separatorVisible, settings.clock.showSeconds],
+  );
 
-      {/* Date Display */}
+  const DateDisplay = useMemo(
+    () => (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -98,6 +99,23 @@ export const Clock = () => {
           {dateStr}
         </span>
       </motion.div>
+    ),
+    [dateStr],
+  );
+
+  return (
+    <div className="flex flex-col items-center justify-center gap-8">
+      {settings.clock.order === "time-date" ? (
+        <>
+          {TimeDisplay}
+          {DateDisplay}
+        </>
+      ) : (
+        <>
+          {DateDisplay}
+          {TimeDisplay}
+        </>
+      )}
     </div>
   );
 };
