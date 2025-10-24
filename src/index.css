@@ -34,18 +34,18 @@
     --ring: 341 91% 60%;
 
     --radius: 1rem;
-    
+
     --clock-hour: 341 91% 60%;
     --clock-minute: 240 5.9% 10%;
     --clock-second: 240 5.9% 10%;
     --clock-separator: 240 5.9% 10%;
     --date-bg: 240 4.8% 95.9%;
     --date-text: 240 5.9% 10%;
-    
+
     --gradient-start: 330 80% 70%;
     --gradient-mid: 270 70% 65%;
     --gradient-end: 220 90% 45%;
-    
+
     --wave-line: 341 91% 60%;
 
     --sidebar-background: 0 0% 98%;
@@ -94,11 +94,11 @@
     --clock-separator: 354 12.2% 70.6%;
     --date-bg: 0 0% 85%;
     --date-text: 220 20% 15%;
-    
+
     --gradient-start: 330 80% 70%;
     --gradient-mid: 270 70% 65%;
     --gradient-end: 220 90% 45%;
-    
+
     --wave-line: 39 100% 59.3%;
 
     --sidebar-background: 0 0% 98%;
@@ -110,16 +110,107 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  /* Palettes: override key brand variables based on data-palette */
+  :root[data-palette="rose"] {
+    --primary: 341 91% 60%;
+    --accent: 341 91% 60%;
+    --ring: 341 91% 60%;
+    --clock-hour: 341 91% 60%;
+    --wave-line: 341 91% 60%;
+  }
+  .dark[data-palette="rose"] {
+    --primary: 341 91% 60%;
+    --accent: 341 91% 60%;
+    --ring: 341 91% 60%;
+    --clock-hour: 341 91% 60%;
+    --wave-line: 341 91% 60%;
+  }
+
+  :root[data-palette="violet"] {
+    --primary: 262 83% 58%;
+    --accent: 262 83% 58%;
+    --ring: 262 83% 58%;
+    --clock-hour: 262 83% 58%;
+    --wave-line: 262 83% 58%;
+  }
+  .dark[data-palette="violet"] {
+    --primary: 262 83% 58%;
+    --accent: 262 83% 58%;
+    --ring: 262 83% 58%;
+    --clock-hour: 262 83% 58%;
+    --wave-line: 262 83% 58%;
+  }
+
+  :root[data-palette="blue"] {
+    --primary: 217.2 91.2% 59.8%;
+    --accent: 217.2 91.2% 59.8%;
+    --ring: 217.2 91.2% 59.8%;
+    --clock-hour: 217.2 91.2% 59.8%;
+    --wave-line: 217.2 91.2% 59.8%;
+  }
+  .dark[data-palette="blue"] {
+    --primary: 217.2 91.2% 59.8%;
+    --accent: 217.2 91.2% 59.8%;
+    --ring: 217.2 91.2% 59.8%;
+    --clock-hour: 217.2 91.2% 59.8%;
+    --wave-line: 217.2 91.2% 59.8%;
+  }
+
+  :root[data-palette="emerald"] {
+    --primary: 142.1 70.6% 45.3%;
+    --accent: 142.1 70.6% 45.3%;
+    --ring: 142.1 70.6% 45.3%;
+    --clock-hour: 142.1 70.6% 45.3%;
+    --wave-line: 142.1 70.6% 45.3%;
+  }
+  .dark[data-palette="emerald"] {
+    --primary: 142.1 70.6% 45.3%;
+    --accent: 142.1 70.6% 45.3%;
+    --ring: 142.1 70.6% 45.3%;
+    --clock-hour: 142.1 70.6% 45.3%;
+    --wave-line: 142.1 70.6% 45.3%;
+  }
+
+  :root[data-palette="amber"] {
+    --primary: 38 92% 50%;
+    --accent: 38 92% 50%;
+    --ring: 38 92% 50%;
+    --clock-hour: 38 92% 50%;
+    --wave-line: 38 92% 50%;
+  }
+  .dark[data-palette="amber"] {
+    --primary: 38 92% 50%;
+    --accent: 38 92% 50%;
+    --ring: 38 92% 50%;
+    --clock-hour: 38 92% 50%;
+    --wave-line: 38 92% 50%;
+  }
+
+  :root[data-palette="cyan"] {
+    --primary: 188 94% 42%;
+    --accent: 188 94% 42%;
+    --ring: 188 94% 42%;
+    --clock-hour: 188 94% 42%;
+    --wave-line: 188 94% 42%;
+  }
+  .dark[data-palette="cyan"] {
+    --primary: 188 94% 42%;
+    --accent: 188 94% 42%;
+    --ring: 188 94% 42%;
+    --clock-hour: 188 94% 42%;
+    --wave-line: 188 94% 42%;
+  }
 }
 
 @layer utilities {
   .font-display {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-weight: 800;
   }
-  
+
   .font-date {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-weight: 500;
   }
 }
